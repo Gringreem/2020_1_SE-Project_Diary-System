@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&amp;display=swap" rel="stylesheet">
+  
+        <link rel="stylesheet" href="static/signin/fonts/icomoon/style.css">
+  
+        <link rel="stylesheet" href="static/signin/css/owl.carousel.min.css">
+  
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="static/signin/css/bootstrap.min.css">
+        
+        <!-- Style -->
+        <link rel="stylesheet" href="static/signin/css/style.css">
+  
+    </head>
+
+    <body>
+
+        <div class="contents">
+    
+          <div class="container">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-md-12">
+                <div class="form-block mx-auto">
+                  <div class="text-center mb-5">
+                    <h3 class="text-uppercase">SIGN UP</h3>
+                  </div>
+        
+                <form  action = "http://localhost:5000/signup" method = "POST" name="signup-form">
+                    <div class="form-group first">
+                        <label for="email">E-mail</label>
+                        <input type="text" class="form-control" id="email" placeholder="Your E-mail" name="email" required/>
+                    </div>
+                    <div class="form-group last mb-3">
+                        <label for="id">ID</label>
+                        <input type="id" class="form-control" name="id" required placeholder="Your ID"/><br><br>
+                        
+                        <label for="userpw">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Your Password" onchange="isSame()" required/><br><br>
+                        
+                        <label for="pwcheck">Password Check</label>
+                        <input type="password" class="form-control" id="pwcheck" name="pwcheck" placeholder="Password Again" onchange="isSame()" required/><br><br>
+                        <p id="same"></p>
+                    </div>
+
+                    <input type="submit" value="Register" class="btn btn-block py-2 btn-primary"><br>
+                    <div class="text-center pt-12 pb-12">
+                        <p>Already have an account? <a href="http://localhost:5000/login" class="underline font-semibold">Sign in here.</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%with messages = get_flashed_messages()%}
+        {%if messages %}
+        <script type="text/javascript">
+            alert("{{messages[-1]}}");
+        </script>
+        {%endif%}
+        {%endwith%}
+        <script>
+
+          var pw = document.getElementById('userpw').value;
+          var pwck = document.getElementById('userpwcheck').value;
+
+          function isSame(){
+              if(document.getElementById('userpw').value!='' && document.getElementById('userpwcheck').value!=''){
+                  
+                  if (document.getElementById('userpw').value != document.getElementById('userpwcheck').value){
+                      document.getElementById('same').innerHTML = '비밀번호가 일치하지 않습니다.';
+                      document.getElementById('same').style.color = "red";
+                  }else{
+                      document.getElementById('same').innerHTML = '비밀번호가 일치합니다.'
+                      document.getElementById('same').style.color = 'green';
+                  }
+              }
+          }
+      </script>
+    </body>
+</html>

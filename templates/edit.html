@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit Diary</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        
+        <style>
+            body {
+                padding-top: 70px;
+                padding-bottom: 30px;
+                margin-left: 300px;
+                margin-right: 300px;
+            }
+            button{
+                border: none;
+                border-radius: 10px;
+                background:#3a083b;
+                color: white;
+                width: 80px;
+                height: 40px;
+                text-align: center;
+            }
+            button:hover{
+                background: #3a083b;
+                color: white;
+            }
+            #back{
+                position: relative;
+                left: 500px;
+                bottom: 40px;
+            }
+        </style>
+
+        <script type="text/javascript">
+            window.addEventListener('load', () => {
+                const params = (new URL(document.location)).searchParams
+            
+                const id = params.get('id');
+                const title = params.get('title');
+                const content = params.get('content');
+                const image_name = params.get('image_name');
+            
+                document.getElementById("result-id").innerHTML = id;
+                document.getElementById("result-title").innerHTML = title;
+                document.getElementById("result-conten").innerHTML = content;
+                document.getElementById("result-image_name").innerHTML = image_name;
+            })
+        </script>
+        
+    </head>
+
+    <body>
+        
+        <form method="POST" action="http://localhost:5000//edit" enctype="multipart/form-data">
+            <input type = "hidden" id = "id" name = "id" value = {{id}} />
+
+            <label for="title">제목</label> 
+            <input type="text" name="title" value={{title}} class="form-control"/>
+            <p>{{title}}</p>
+
+            <label for="content" class="text-lg">내용</label>
+            <textarea cols="50" rows="20" class="form-control" id="content" name="content">{{content}}</textarea><br><br>
+
+            {% if image_name %}
+            <img src={{item1.image_name}} width="300" height="300" />
+            {% endif %}
+            <label for="image">사진 업로드</label>
+            <input type="file" id="image" name="image"/>
+            
+            <button type="submit" onclick="edit()">Confirm</button>
+        </form>
+        <button type="button" id="back" onclick="location.href='main'">Cancel</button>
+
+        <script>
+            function edit(){
+                var ans = confirm('이대로 수정하시겠습니까?')
+                if(ans){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        </script>
+
+    </body>
+</html>

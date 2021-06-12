@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Diary System</title>
+            
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        
+        <!-- Theme CSS -->  
+        <link id="theme-style" rel="stylesheet" href="static/diary/css/theme-1.css">
+    
+        <style>
+            .float{
+                top: 140px;
+                left: 1550px;
+                bottom: 40px;
+                right: 40px;
+                width: 60px;
+                height: 30px;
+                position: fixed;
+                background-color: #7e177e;
+                color:#ffffff;
+                border-radius: 12px;
+                text-align: center;
+                box-shadow: 3px 3px 3px #959595;
+            }
+
+            .my-float{
+                margin-top: 23px;
+            }
+            
+        </style>
+    </head>
+
+    <body>
+        
+        <header class="header text-center">
+            {%if id %}
+            <h1 class="blog-name pt-lg-4 mb-2">{{id}}</h1>
+            <div class="my-2 my-md-3">
+                <button class="btn btn-primary" onclick="location.href='/signout'">Sign out</button>
+            </div>
+        </header>
+
+        <a href="addDiary" class="float">New</a>
+
+        <div class="main-wrapper">
+            <section class="cta-section theme-bg-light py-5">
+                <div style="padding-left: 50px;">
+                    <h2 class="heading">My Diary</h2>
+                </div>
+            </section>
+            {% for item1 in output %}
+            <form name="form" style="width:75%; padding-left: 50px; border: dashed 1px  black;">
+                <div id="item" style="font-size:50px; font-weight:bold;">{{item1.title}}</div>
+                <div id="item2">From {{item1.date.year}}-{{item1.date.month}}-{{item1.date.day}} {{item1.date.hour}}:{{item1.date.minute}}</div><br>
+                <span style="word-break:break-all; margin-top:20px;font-size:18px;" >{{item1.content}}</span><br>
+
+                {% if item1.image_name %}
+                <img src={{item1.image_name}} alt={{item1.content}} width="150" style="vertical-align:middle;" ><br><br>
+                {% endif %}
+                
+                
+                <input type = "hidden" id = "id" name = "id" value = {{item1.id}} />
+                <input type = "hidden" id = "title" name = "title" value = {{item1.title}} />
+                <button type="submit" style="border: none; border-radius: 10px; background:#8c2de6; color: white; width: 80px; height: 40px; text-align: center;" 
+                formmethod="GET" onclick="javascript: form.action='/edit';">수정하기</button>
+                <button type="submit" style="border: none; border-radius: 10px; background:#ec2727; color: white; width: 80px; height: 40px; text-align: center;" 
+                formmethod="POST" onclick="javascript: form.action='/delete';">삭제하기</button>
+                <br><br>
+            </form>
+            <br>
+            {% endfor %}
+            {% endif %}
+    
+        </div>
+        <script src="static/diary/plugins/jquery-3.3.1.min.js"></script>
+        
+    </body>
+</html>
+
+
+

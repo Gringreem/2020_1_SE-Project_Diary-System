@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New Diary</title>
+        <!-- jQuery -->
+    
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    
+        <style>
+            body {
+                padding-top: 70px;
+                padding-bottom: 30px;
+                margin-left: 300px;
+                margin-right: 300px;
+            }
+            button{
+                border: none;
+                border-radius: 10px;
+                background:#3a083b;
+                color: white;
+                width: 80px;
+                height: 40px;
+                text-align: center;
+                box-shadow: 3px 3px 3px #959595;
+            }
+            button:hover{
+                background: #3a083b;
+                color: white;
+            }
+            #back{
+                position: relative;
+                left: 500px;
+                bottom: 40px;
+            }
+            
+        </style>
+    </head>
+
+    <body>
+        <form action="http://localhost:5000/addDiary" method="POST" name="form" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title">제목</label>
+                <input type="title" name="title" placeholder="Title" class="form-control" required/><br>
+            
+                <label for="content">내용</label>
+                <textarea cols="50" rows="20" class="form-control" id="content" placeholder="Content" name="content"></textarea><br>                
+            </div>
+
+            <label for="image">사진 업로드</label>
+            <input type="file" id="image" name="image"/>
+
+            <button type="submit" id="btn_upload">Confirm</button>
+        </form>
+        <button type="button" id="back" onclick="location.href='main'">Cancel</button>
+
+    </body>
+</html>
